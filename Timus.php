@@ -17,13 +17,14 @@ for($i = 0;$i<$count;++$i)
 
 usort($problems, 'compProblems');
 
-$users = array( "69974" => array(), "70163" => array(), "92807" => array(), "35562" => array(), "45060" => array(), );//"34002" => array(), "16705" => array(), "16727" => array(), );
+$users = array( "69974" => array(), "70163" => array(), "92807" => array(), "100213" => array(), "74763" => array(), "105514" => array(), "117364" => array(), "91598" => array(), "35562" => array(), "45060" => array(), );//"34002" => array(), "16705" => array(), "16727" => array(), );
 
 foreach($users as $user=>$solved){
     $body = file_get_contents("http://acm.timus.ru/author.aspx?id=$user");
     
 	preg_match('/<H2 CLASS="author_name">([^<>]+)<\/H2>/',$body,$match);
-    $users[$user]['name'] = $match[1];
+    if(array_key_exists(1,$match)) $users[$user]['name'] = $match[1];
+	else $users[$user]['name'] = "";
 
     $count = preg_match_all('/<TD CLASS="accepted"><A[^<>]+>([0-9]{4})<\/A><\/TD>/', $body, $match, PREG_SET_ORDER);
     
@@ -34,7 +35,7 @@ foreach($users as $user=>$solved){
 $total = count($problems);
 echo "<h1>$total problemas</h1><br>";
 
-echo "\n<table border=1 bordercolor=#999999 bordercolordark=gray cellpadding=5 style='border-collapse: collapse' align=center><thead>";
+echo "\n<table class=\"tableWithFloatingHeader\" border=1 bordercolor=#999999 bordercolordark=gray cellpadding=5 style='border-collapse: collapse' align=center><thead>";
 echo "<tr bgcolor=#A4C6FF>";
 echo "<th width=50><font color=black>ID</font></th>";
 echo "<th width=320><font color=black>Title</font></th>";
