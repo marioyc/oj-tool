@@ -41,8 +41,10 @@ echo "<th><font color=black>ID</font></th>";
 echo "<th><font color=black>Title</font></th>";
 echo "<th><font color=black>Difficulty</font></th>";
 
+$sum = array();
 
 foreach($users as $user=>$solved){
+	$sum[$user] = 0;
     $solved = count($users[$user]) - 1;
     echo "<th width = 100>".$users[$user]['name']."<br>($solved)</th>";
 }
@@ -61,7 +63,10 @@ for($i = 0;$i < $total;++$i){
     
     foreach($users as $user=>$solved){
         $state = "";
-        if(array_key_exists($id,$users[$user])) $state = "AC";
+        if(array_key_exists($id,$users[$user])){
+			$state = "AC";
+			$sum[$user] += $i;
+		}
         
         echo "<td align=center><font color=red>$state</font></td>";
         //<IMG SRC="images/ok.gif" ALT="Ok">
@@ -70,6 +75,35 @@ for($i = 0;$i < $total;++$i){
     echo "</tr>";
 }
 echo "\n</tbody></table>";
+
+echo "<br><h1>Next to solve</h1><br>";
+echo "\n<table class=\"tableWithFloatingHeader\" border=1 bordercolor=#999999 bordercolordark=gray cellpadding=5 style='border-collapse: collapse' align=center><thead>";
+echo "<tr bgcolor=#A4C6FF>";
+
+foreach($users as $user=>$solved){
+	$name = $users[$user]['name'];
+    echo "<th width = 100>$name</th>";
+}
+
+echo "</tr></thead><tbody><tr>\n";
+
+foreach($users as $user=>$solved){
+    $solved = count($users[$user]) - 1;
+    
+	$next = 0;
+	if($solved > 0) $next = ($sum[$user] + $solved - 1) / $solved;
+	
+	while(TRUE){
+		if(!array_key_exists($problems[$next]->id,$users[$user])){
+			$id = $problems[$next]->id;
+			echo "<td><a href=\"http://acm.timus.ru/problem.aspx?space=1&num=$id\">".$id."</a><br></td>";
+			break;
+		}
+		
+		++$next;
+	}
+}
+echo "</tr></tbody></table>";
 
 ?>
 
