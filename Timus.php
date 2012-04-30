@@ -17,7 +17,7 @@ for($i = 0;$i<$count;++$i)
 
 usort($problems, 'compProblems');
 
-$users = array( "69974" => array(), "70163" => array(), "92807" => array(), "100213" => array(), "74763" => array(), "105514" => array(), "117364" => array(), "91598" => array(), "35562" => array(), "45060" => array(), );//"34002" => array(), "16705" => array(), "16727" => array(), );
+$users = array( "69974" => array(), "70163" => array(), "92807" => array(), "100213" => array(), "74763" => array(), "105514" => array(), "91598" => array(), "35562" => array(), "45060" => array(), );//"34002" => array(), "16705" => array(), "16727" => array(), );
 
 foreach($users as $user=>$solved){
     $body = file_get_contents("http://acm.timus.ru/author.aspx?id=$user");

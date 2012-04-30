@@ -1,9 +1,9 @@
 <html>
 <head>
     <title>OJ-Tool (Mario Ynocente Castro)</title>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	
-	<script type="text/javascript">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+    <script type="text/javascript">
         function UpdateTableHeaders() {
             $("div.divTableWithFloatingHeader").each(function() {
                 var originalHeaderRow = $(".tableFloatingHeaderOriginal", this);
@@ -14,14 +14,13 @@
                     floatingHeaderRow.css("visibility", "visible");
                     floatingHeaderRow.css("top", Math.min(scrollTop - offset.top, $(this).height() - floatingHeaderRow.height()) + "px");
 
-                    
+                    // Copy cell widths from original header
                     $("th", floatingHeaderRow).each(function(index) {
-                        $(this).width( $("th", originalHeaderRow).eq(index).width() + 1);
-                        //$(this).outerWidth( $("th", originalHeaderRow).eq(index).outerWidth(true) );
+                        $(this).width($("th", originalHeaderRow).eq(index).width() + 1);
                     });
 
-                    floatingHeaderRow.width(originalHeaderRow.width() + 1);
-                    //floatingHeaderRow.outerWidth(originalHeaderRow.outerWidth(true));
+                    // Copy row width from whole table
+                    //floatingHeaderRow.css("width", originalHeaderRow.css("width"));
                 }
                 else {
                     floatingHeaderRow.css("visibility", "hidden");
@@ -30,25 +29,18 @@
             });
         }
 
-        $(window).load(function() {
+        $(document).ready(function() {
             $("table.tableWithFloatingHeader").each(function() {
                 $(this).wrap("<div class=\"divTableWithFloatingHeader\" style=\"position:relative\"></div>");
 
                 var originalHeaderRow = $("tr:first", this)
                 originalHeaderRow.before(originalHeaderRow.clone());
-                var clonedHeaderRow = $("tr:first", this);
-				
-				/*$("th", clonedHeaderRow).each(function(index) {
-                        var cellWidth = $("th", originalHeaderRow).eq(index).width();
-                        $(this).width(cellWidth);
-                    });
-
-                clonedHeaderRow.width(originalHeaderRow.width());*/
+                var clonedHeaderRow = $("tr:first", this)
 
                 clonedHeaderRow.addClass("tableFloatingHeader");
                 clonedHeaderRow.css("position", "absolute");
                 clonedHeaderRow.css("top", "0px");
-                clonedHeaderRow.css("left", $(this).css("margin-left"));
+                clonedHeaderRow.css("left", parseInt($(this).css("margin-left")) + 1);
                 clonedHeaderRow.css("visibility", "hidden");
 
                 originalHeaderRow.addClass("tableFloatingHeaderOriginal");
