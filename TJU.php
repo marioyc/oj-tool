@@ -8,7 +8,7 @@
 
 $problems = array();
 
-for($vol = 1;$vol<=29;++$vol){
+for($vol = 1;$vol <= 29;++$vol){
     $body = file_get_contents("http://acm.tju.edu.cn/toj/list$vol.html");
 
     $count = preg_match_all('/p\([01],[012],([0-9]{4}),"(.*)",[0-9]+,([0-9]+),[0-9]+,"[0-9]+\.[0-9]+",[01],[01],[01]\)/', $body, $match,  PREG_SET_ORDER);
@@ -19,7 +19,7 @@ for($vol = 1;$vol<=29;++$vol){
 
 usort($problems, 'compProblems');
 
-$users = array("marioyc" => array(), "trulo17" => array(), "hamlet" => array(), "roypalacios" => array(), "forifchen" => array(),"a20012251" => array(), "amsantosr" => array(), );
+$users = array("marioyc" => array(), "trulo17" => array(), "hamlet" => array(), "roypalacios" => array(), "forifchen" => array(),"a20012251" => array(), );
 
 foreach($users as $user=>$solved){
     $body = file_get_contents("http://acm.tju.edu.cn/toj/user_$user.html");
@@ -33,15 +33,15 @@ foreach($users as $user=>$solved){
 $total = count($problems);
 echo "<h1>$total problemas</h1><br>";
 
-echo "\n<table border=1 bordercolor=lightgrey bordercolordark=gray cellpadding=5 style='border-collapse: collapse' align=center><thead>";
+echo "\n<table class=\"tableWithFloatingHeader\" border=1 bordercolor=lightgrey bordercolordark=gray cellpadding=5 style='border-collapse: collapse'><thead>";
 echo "<tr bgcolor=#FFFFD0>";
-echo "<th width=50><font color=blue>ID</font></th>";
-echo "<th width=320><font color=green>Title</font></th>";
-echo "<th width=70><font color=red>AC</font></th>";
+echo "<th><font color=blue>ID</font></th>";
+echo "<th><font color=green>Title</font></th>";
+echo "<th><font color=red>AC</font></th>";
 
 foreach($users as $user=>$solved){
     $solved = count($users[$user]);
-    echo "<th>$user<br>($solved)</th>";
+    echo "<th width = 100>$user<br>($solved)</th>";
 }
 echo "</tr></thead><tbody>"; 
 

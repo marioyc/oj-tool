@@ -14,14 +14,14 @@
                     floatingHeaderRow.css("visibility", "visible");
                     floatingHeaderRow.css("top", Math.min(scrollTop - offset.top, $(this).height() - floatingHeaderRow.height()) + "px");
 
-                    // Copy cell widths from original header
+                    
                     $("th", floatingHeaderRow).each(function(index) {
-                        var cellWidth = $("th", originalHeaderRow).eq(index).css('width');
-                        $(this).css('width', cellWidth);
+                        $(this).width( $("th", originalHeaderRow).eq(index).width() + 1);
+                        //$(this).outerWidth( $("th", originalHeaderRow).eq(index).outerWidth(true) );
                     });
 
-                    // Copy row width from whole table
-                    floatingHeaderRow.css("width", $(this).css("width"));
+                    floatingHeaderRow.width(originalHeaderRow.width() + 1);
+                    //floatingHeaderRow.outerWidth(originalHeaderRow.outerWidth(true));
                 }
                 else {
                     floatingHeaderRow.css("visibility", "hidden");
@@ -30,13 +30,20 @@
             });
         }
 
-        $(document).ready(function() {
+        $(window).load(function() {
             $("table.tableWithFloatingHeader").each(function() {
                 $(this).wrap("<div class=\"divTableWithFloatingHeader\" style=\"position:relative\"></div>");
 
                 var originalHeaderRow = $("tr:first", this)
                 originalHeaderRow.before(originalHeaderRow.clone());
-                var clonedHeaderRow = $("tr:first", this)
+                var clonedHeaderRow = $("tr:first", this);
+				
+				/*$("th", clonedHeaderRow).each(function(index) {
+                        var cellWidth = $("th", originalHeaderRow).eq(index).width();
+                        $(this).width(cellWidth);
+                    });
+
+                clonedHeaderRow.width(originalHeaderRow.width());*/
 
                 clonedHeaderRow.addClass("tableFloatingHeader");
                 clonedHeaderRow.css("position", "absolute");

@@ -37,14 +37,14 @@ echo "<h1>$total problemas</h1><br>";
 
 echo "\n<table class=\"tableWithFloatingHeader\" border=1 bordercolor=#999999 bordercolordark=gray cellpadding=5 style='border-collapse: collapse' align=center><thead>";
 echo "<tr bgcolor=#A4C6FF>";
-echo "<th width=50><font color=black>ID</font></th>";
-echo "<th width=320><font color=black>Title</font></th>";
-echo "<th width=65><font color=black>Difficulty</font></th>";
+echo "<th><font color=black>ID</font></th>";
+echo "<th><font color=black>Title</font></th>";
+echo "<th><font color=black>Difficulty</font></th>";
 
 
 foreach($users as $user=>$solved){
     $solved = count($users[$user]) - 1;
-    echo "<th width=150>".$users[$user]['name']."<br>($solved)</th>";
+    echo "<th width = 100>".$users[$user]['name']."<br>($solved)</th>";
 }
 echo "</tr></thead><tbody>";
 
