@@ -10,7 +10,7 @@ $problems = array();
 
 for($i = 0;$i < 55;++$i){
     $lim = $i*50;
-    $body = file_get_contents("http://www.spoj.pl/problems/classical/sort=-6,start=$lim");
+    $body = file_get_contents("http://www.spoj.pl/problems/classical/sort=6,start=$lim");
     
     $problemPosition = getPositions($body, '<tr class="problemrow">');
     if(count($problemPosition)==0) break;
@@ -43,24 +43,26 @@ foreach($users as $user=>$solved){
 $total = count($problems);
 echo "<h1>$total problemas</h1><br>";
 
-echo "\n<table border=1 bordercolor=white cellpadding=5 style='border-collapse: collapse; color: #000020; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px' align=center>";
-echo "<thead><tr style='background-color: #000080; color: #DDDDFF'><th style='background-image: url(img/sulcorner.png); background-position:left top; background-repeat:no-repeat;'>CODE</th>";
-echo "<th>NAME</th>";
-echo "<th>USERS</th>";
+$head = "\n<table border=1 bordercolor=white cellpadding=5 style='border-collapse: collapse; color: #000020; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px' align=center>";
+$head = $head."<thead><tr style='background-color: #000080; color: #DDDDFF'><th style='background-image: url(img/sulcorner.png); background-position:left top; background-repeat:no-repeat;'>CODE</th>";
+$head = $head."<th>NAME</th>";
+$head = $head."<th>USERS</th>";
 
 $i = 1;
 
 foreach($users as $user=>$solved){
     $solved = count($users[$user]);
 	
-    if($i==count($users)) echo "<th style='background-image: url(img/surcorner.png); background-position:right top; background-repeat:no-repeat;'>$user<br>($solved)</th>";
-    else echo "<th>$user<br>($solved)</th>";
+    if($i==count($users)) $head = $head."<th style='background-image: url(img/surcorner.png); background-position:right top; background-repeat:no-repeat;'>$user<br>($solved)</th>";
+    else $head = $head."<th>$user<br>($solved)</th>";
 	
     ++$i;
 }
-echo "</tr></thead><tbody>";
+$head = $head."</tr></thead><tbody>";
 
 for($i = 0;$i < $total;++$i){
+    if($i % 15 == 0) echo $head;
+    
     $id = $problems[$i]->id;
     $name = $problems[$i]->name;
     $AC = $problems[$i]->AC;
@@ -79,8 +81,9 @@ for($i = 0;$i < $total;++$i){
     }
     
     echo "</tr>";
+
+    if($i % 15 == 14 || $i == $total - 1) echo "\n</tbody></table>";
 }
-echo "\n</tbody></table>";
 
 ?>
 
