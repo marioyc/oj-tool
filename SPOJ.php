@@ -8,7 +8,7 @@
 
 $problems = array();
 
-for($i = 0;$i<31;++$i){
+for($i = 0;$i < 55;++$i){
     $lim = $i*50;
     $body = file_get_contents("http://www.spoj.pl/problems/classical/sort=-6,start=$lim");
     
@@ -26,7 +26,7 @@ for($i = 0;$i<31;++$i){
 }
 
 
-$users = array( "marioyc" => array(), "trulo_17" => array(), "hamlet_fiis" => array(), "roypalacios" => array(), "a20012251" => array(),);
+$users = array( "marioyc" => array(), "a20012251" => array(), "marspeople" => array(), "ffao" => array(), "cjtoribio" => array(), "jbernadas" => array(), "bcurcio" => array(), "antimatter" => array(), "jhcmonroy" => array(), "lordstefano" => array(), "santo" => array(), "rudradevbasak" => array(), "damians" => array(), "marioyc" => array(), "stjepang" => array(), "anton_lunyov" => array(), );
 
 foreach($users as $user=>$solved){
     $body = file_get_contents("http://www.spoj.pl/users/$user/");
